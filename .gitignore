@@ -1,0 +1,62 @@
+# ==========================================
+# 1. PYTHON (Backend - carpeta backend/)
+# ==========================================
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+
+# Entornos virtuales locales (Backend)
+backend/.venv/
+backend/venv/
+backend/env/
+
+# Cobertura y reportes de Pytest
+**/.coverage
+**/.coverage.*
+**/htmlcov/
+**/coverage.xml
+**/.pytest_cache/
+
+# ==========================================
+# 2. JAVASCRIPT & FRONTEND (carpeta frontend/)
+# ==========================================
+# Dependencias pesadas
+node_modules/
+**/node_modules/
+
+# Archivos de compilación o empaquetado (Vite, Webpack, etc.)
+frontend/dist/
+frontend/build/
+
+# Reportes y logs de Node
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+
+# ==========================================
+# 3. TESTS E2E (carpeta tests-e2e/)
+# ==========================================
+# Reportes de Playwright y videos/capturas de fallos
+tests-e2e/playwright-report/
+tests-e2e/test-results/
+tests-e2e/.playwright-artifacts/
+
+# ==========================================
+# 4. SEGURIDAD, DOCKER Y EDITORES
+# ==========================================
+# Variables de entorno (¡No subas tus credenciales!)
+**/.env
+**/.env.*
+!.env.example
+
+# Configuraciones de Editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+
+    - name: Run tests with coverage
+      run: |
+        PYTHONPATH=backend/src python -m pytest backend/tests/ --cov=backend/src/ --cov-report=term-missing > coverage.txt
+        cat coverage.txt
+
+    - name: Update Coverage Badge in README
+      if: github.event_name == 'push'
+      run: |
+        # Extract total coverage percentage from coverage.txt
+        # The line format is usually: "TOTAL                   462     30    94%"
+        COVERAGE=$(grep "TOTAL" "coverage.txt" | awk '{print $4}' | sed 's/%//')
+        echo "Coverage detected: $COVERAGE%"
+        
+        if [ ! -z "$COVERAGE" ]; then
+          # Define color based on coverage percentage
+          if [ "$COVERAGE" -ge 90 ]; then
+            COLOR="brightgreen"
+          elif [ "$COVERAGE" -ge 80 ]; then
+            COLOR="green"
+          elif [ "$COVERAGE" -ge 70 ]; then
+            COLOR="yellowgreen"
+          elif [ "$COVERAGE" -ge 60 ]; then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+          
+          # Replace the coverage badge inside README.md
+          # Search for coverage badge pattern: coverage-<any_number>%25-<any_color> or coverage-<any_number>%-<any_color>
+          # We will target: coverage-[0-9]+%25-[a-z]+ and coverage-[0-9]+%-[a-z]+
+          sed -i -E "s/coverage-[0-9]+%25-[a-z]+/coverage-${COVERAGE}%25-${COLOR}/g" "README.md"
+          sed -i -E "s/coverage-[0-9]+%-[a-z]+/coverage-${COVERAGE}%25-${COLOR}/g" "README.md"
+          
+          # Check diff and push if updated
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git diff --quiet "README.md" || (git add "README.md" && git commit -m "chore: update coverage badge to ${COVERAGE}% [skip ci]" && git push)
+        else
+          echo "Could not extract coverage value."
+          exit 1
+        fi

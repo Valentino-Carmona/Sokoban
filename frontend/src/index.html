@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sokoban Web</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sokoban Web MVP</h1>
+            <div class="level-info">
+                <span>Nivel: <strong id="level-display">1</strong></span>
+                <span id="win-message" class="hidden">¡Nivel Completado!</span>
+                <span id="finish-message" class="hidden">¡Felicidades, terminaste todos los niveles!</span>
+            </div>
+        </header>
+
+        <main>
+            <div id="game-board"></div>
+            
+            <div class="controls-hint">
+                <p>Controles:</p>
+                <ul>
+                    <li><strong>Flechas / WASD</strong>: Moverse</li>
+                    <li><strong>1</strong>: Deshacer</li>
+                    <li><strong>2</strong>: Rehacer</li>
+                    <li><strong>3</strong>: Backtracking</li>
+                    <li><strong>R</strong>: Reiniciar Nivel</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>
