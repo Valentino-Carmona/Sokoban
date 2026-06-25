@@ -4,7 +4,7 @@ import os
 from flask import Flask, jsonify, request, send_from_directory
 
 frontend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'frontend', 'src'))
-app = Flask(__name__, static_folder=frontend_dir)
+app = Flask(__name__, static_folder=frontend_dir, static_url_path='/static')
 
 # Ajustar el directorio de trabajo
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
