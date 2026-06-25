@@ -10,100 +10,6 @@
 
 ¡Bienvenido a **Sokoban Python Edition**! Esta es una versión moderna, ligera y robusta del clásico juego de ingenio japonés. Diseñado con un enfoque limpio y una arquitectura de software desacoplada, este proyecto ofrece una experiencia de juego fluida, intuitiva y con herramientas avanzadas para resolver acertijos como base de desarrollo.
 
----
-
-## 🚀 Instalación y Ejecución
-
-Guía paso a paso para clonar, instalar y correr el proyecto, además de ejecutar sus pruebas y ver el reporte de cobertura.
-
-### 📥 1. Descargar el Proyecto
-
-Si aún no tienes el código en tu máquina, primero descárgalo:
-
-1. **Clona el repositorio** desde GitHub:
-   ```bash
-   git clone https://github.com/algo1-rw-alu/2022b_carmona.git
-   ```
-2. **Navega al directorio del juego**:
-   ```bash
-   cd 2022b_carmona
-   ```
-
----
-
-### 🎮 2. Instalación y Ejecución (Elige tu Opción)
-
-Tienes dos alternativas para preparar y ejecutar el juego, dependiendo de tus herramientas y nivel de experiencia.
-
-#### 🐳 Opción A: Usando Docker (Recomendado, profesional)
-
-Esta es la forma más rápida y robusta. No necesitas configurar entornos virtuales ni instalar Python en tu máquina; Docker aislará todo el ambiente por ti.
-
-1. **Construye y levanta el contenedor** desde la consola:
-   ```bash
-   docker compose up --build
-   ```
-
-#### 🐍 Opción B: Usando Python (Entorno Virtual clásico)
-
-Si no tienes Docker o prefieres una instalación local, puedes usar Python.
-
-1. **Crea y activa un entorno virtual**:
-   * En **Windows**:
-     ```bash
-     python -m venv .venv
-     .venv\Scripts\activate
-     ```
-   * En **macOS/Linux**:
-     ```bash
-     python3 -m venv .venv
-     source .venv/bin/activate
-     ```
-2. **Instala las dependencias necesarias**:
-   ```bash
-   pip install -r backend/requirements.txt
-   ```
-3. **Inicia el servidor Flask**:
-   ```bash
-   cd backend/src
-   python app.py
-   ```
-
----
-
-### 🌐 3. ¡A Jugar!
-
-Una vez que el servidor reporte que está corriendo (ya sea a través de Docker o de tu consola de Python):
-
-1. **Abre tu navegador web** e ingresa a la siguiente dirección:
-   [http://127.0.0.1:5000](http://127.0.0.1:5000)
-2. ¡Listo! Ya puedes disfrutar de la experiencia Sokoban MVP en tu navegador con soporte completo para todas las mecánicas.
-
----
-
-### 🧪 3. Correr las Pruebas y Observar Cobertura
-
-El proyecto cuenta con un conjunto robusto de pruebas automatizadas escritas en `pytest`.
-
-* **Correr las pruebas unitarias e integración**:
-  * En **Windows** (PowerShell):
-    ```powershell
-    $env:PYTHONPATH="backend/src"; python -m pytest backend/tests/
-    ```
-  * En **Linux/macOS**:
-    ```bash
-    PYTHONPATH=backend/src python -m pytest backend/tests/
-    ```
-  *(O simplemente `pytest` con el entorno virtual activo)*
-
-* **Correr las pruebas y ver la cobertura en consola**:
-  Para ver la cobertura de cada archivo y saber qué líneas específicas faltan probar:
-  ```bash
-  python -m pytest --cov=. --cov-report=term-missing
-  ```
-
----
-
 ## 🎮 ¿De qué se trata el juego?
 
 **Sokoban** (que significa "guardián de almacén" en japonés) es un juego de puzles de transporte. 
@@ -185,3 +91,94 @@ La capa de presentación ha sido aislada en su propio entorno dentro del directo
 * **Desacoplamiento Extremo**: El frontend web desconoce por completo las reglas lógicas para completar el nivel o las colisiones. De forma similar, la capa en Python (`soko.py`) no invoca bibliotecas gráficas y retorna tipos de datos primitivos nativos de Python.
 * **Diseño Orientado al MVP (Minimum Viable Project)**: La adopción de Flask evitó reescribir toda la aplicación. Permite reutilizar el 100% de la base de código original de consola/escritorio transformándola en una aplicación para web con una capa mínima de re-enrutamiento.
 * **Alta Fiabilidad vía Testing Automatizado**: En el directorio `backend/tests/unit/`, el proyecto incorpora pruebas automatizadas con herramientas de la industria (`pytest`). Valida desde la integridad estructural interna de la Pila, los bordes en el mapa del Sokoban, y el propio API HTTP final de la aplicación en Python. Todo esto respaldado por un reporte de trazabilidad que garantiza un **estado mayor al 90% en la cobertura del código**, limitando severamente la introducción de bugs (regresiones) a futuro.
+
+---
+
+## 🚀 Instalación y Ejecución
+
+Guía paso a paso para clonar, instalar y correr el proyecto, además de ejecutar sus pruebas y ver el reporte de cobertura.
+
+### 📥 1. Descargar el Proyecto
+
+Si aún no tienes el código en tu máquina, primero descárgalo:
+
+1. **Clona el repositorio** desde GitHub:
+   ```bash
+   git clone https://github.com/Valentino-Carmona/Sokoban.git
+   ```
+2. **Navega al directorio del juego**:
+   ```bash
+   cd Sokoban
+   ```
+
+---
+
+### 🎮 2. Instalación y Ejecución (Elige tu Opción)
+
+Tienes dos alternativas para preparar y ejecutar el juego, dependiendo de tus herramientas y nivel de experiencia.
+
+#### 🐳 Opción A: Usando Docker (Recomendado)
+
+Esta es la forma más rápida y robusta. No necesitas configurar entornos virtuales ni instalar Python en tu máquina; Docker aislará todo el ambiente por ti.
+
+1. **Construye y levanta el contenedor** desde la consola:
+   ```bash
+   docker compose up --build
+   ```
+
+#### 🐍 Opción B: Usando Python (Entorno Virtual)
+
+Si no tienes Docker o prefieres una instalación local, puedes usar Python. Esta opcion sirve para no instalar dependencias en tu maquina.
+
+1. **Crea y activa un entorno virtual**:
+   * En **Windows**:
+     ```bash
+     python -m venv .venv
+     .venv\Scripts\activate
+     ```
+   * En **macOS/Linux**:
+     ```bash
+     python3 -m venv .venv
+     source .venv/bin/activate
+     ```
+2. **Instala las dependencias necesarias**:
+   ```bash
+   pip install -r backend/requirements.txt
+   ```
+3. **Inicia el servidor Flask**:
+   ```bash
+   cd backend/src
+   python app.py
+   ```
+---
+
+### 🌐 3. ¡A Jugar!
+
+Una vez que el servidor reporte que está corriendo (ya sea a través de Docker o de tu consola de Python):
+
+1. **Abre tu navegador web** e ingresa a la siguiente dirección:
+   [http://127.0.0.1:5000](http://127.0.0.1:5000)
+2. ¡Listo! Ya puedes disfrutar de la experiencia Sokoban MVP en tu navegador con soporte completo para todas las mecánicas.
+
+---
+
+### 🧪 3. Correr las Pruebas y Observar Cobertura
+
+El proyecto cuenta con un conjunto robusto de pruebas automatizadas escritas en `pytest`.
+
+* **Correr las pruebas unitarias e integración**:
+  * En **Windows** (PowerShell):
+    ```powershell
+    $env:PYTHONPATH="backend/src"; python -m pytest backend/tests/
+    ```
+  * En **Linux/macOS**:
+    ```bash
+    PYTHONPATH=backend/src python -m pytest backend/tests/
+    ```
+  *(O simplemente `pytest` con el entorno virtual activo)*
+
+* **Correr las pruebas y ver la cobertura en consola**:
+  Para ver la cobertura de cada archivo y saber qué líneas específicas faltan probar:
+  ```bash
+  python -m pytest --cov=. --cov-report=term-missing
+  ```
